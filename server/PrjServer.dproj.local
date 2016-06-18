@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2016/04/13 14:33:03.000.903,=C:\Users\criare\Documents\Embarcadero\Studio\Projects\Unit4.pas</Transaction>
+    <Transaction>2016/04/13 17:13:16.000.742,=C:\Users\criare\Documents\Embarcadero\Studio\Projects\Unit4.pas</Transaction>
+    <Transaction>2016/05/03 15:28:53.000.027,=C:\Users\criare\Documents\Embarcadero\Studio\Projects\Unit4.pas</Transaction>
+    <Transaction>2016/05/03 15:57:52.000.056,=C:\Users\criare\Documents\Embarcadero\Studio\Projects\Unit4.pas</Transaction>
+    <Transaction>2016/06/08 17:52:04.000.977,=C:\Users\criare\Documents\Embarcadero\Studio\Projects\Unit4.pas</Transaction>
+    <Transaction>2016/06/15 14:50:10.000.864,=C:\Users\criare\Documents\Embarcadero\Studio\Projects\Unit4.pas</Transaction>
+    <Transaction>2016/06/15 14:50:28.000.151,C:\Users\criare\Documents\Embarcadero\Studio\Projects\Unit4.pas=C:\Users\criare\Documents\Embarcadero\Studio\Projects\Nova pasta (30)\server\ufrmMain.pas</Transaction>
+    <Transaction>2016/06/15 14:50:28.000.151,C:\Users\criare\Documents\Embarcadero\Studio\Projects\Unit4.dfm=C:\Users\criare\Documents\Embarcadero\Studio\Projects\Nova pasta (30)\server\ufrmMain.dfm</Transaction>
+    <Transaction>2016/06/15 14:50:36.000.165,C:\Users\criare\Documents\Embarcadero\Studio\Projects\Project4.dproj=C:\Users\criare\Documents\Embarcadero\Studio\Projects\Nova pasta (30)\server\PrjServer.dproj</Transaction>
+    <Transaction>2016/06/15 14:51:52.000.673,=C:\Users\criare\Documents\Embarcadero\Studio\Projects\Nova pasta (30)\server\Unit1.pas</Transaction>
+    <Transaction>2016/06/15 14:52:07.000.699,C:\Users\criare\Documents\Embarcadero\Studio\Projects\Nova pasta (30)\server\Unit1.dfm=C:\Users\criare\Documents\Embarcadero\Studio\Projects\Nova pasta (30)\server\udmConexao.dfm</Transaction>
+    <Transaction>2016/06/15 14:52:07.000.699,C:\Users\criare\Documents\Embarcadero\Studio\Projects\Nova pasta (30)\server\Unit1.pas=C:\Users\criare\Documents\Embarcadero\Studio\Projects\Nova pasta (30)\server\udmConexao.pas</Transaction>
+    <Transaction>2016/06/15 15:03:47.000.098,=C:\Users\criare\Documents\Embarcadero\Studio\Projects\Nova pasta (30)\server\PrjServer_TLB.pas</Transaction>
+    <Transaction>2016/06/15 15:03:47.000.078,=C:\Users\criare\Documents\Embarcadero\Studio\Projects\Nova pasta (30)\server\PrjServer.ridl</Transaction>
+    <Transaction>2016/06/15 15:03:53.000.290,=C:\Users\criare\Documents\Embarcadero\Studio\Projects\Nova pasta (30)\server\Unit1.pas</Transaction>
+    <Transaction>2016/06/15 15:06:17.000.973,C:\Users\criare\Documents\Embarcadero\Studio\Projects\Nova pasta (30)\server\Unit1.pas=C:\Users\criare\Documents\Embarcadero\Studio\Projects\Nova pasta (30)\server\urdCliente.pas</Transaction>
+    <Transaction>2016/06/15 15:06:17.000.973,C:\Users\criare\Documents\Embarcadero\Studio\Projects\Nova pasta (30)\server\Unit1.dfm=C:\Users\criare\Documents\Embarcadero\Studio\Projects\Nova pasta (30)\server\urdCliente.dfm</Transaction>
+    <Transaction>2016/06/17 14:02:00.000.022,=C:\Users\criare\Documents\Embarcadero\Studio\Projects\Nova pasta (30)\server\rd\urdCliente.pas</Transaction>
+    <Transaction>2016/06/17 14:04:45.000.594,=C:\Users\criare\Documents\Embarcadero\Studio\Projects\Nova pasta (30)\server\dm\udmConexao.pas</Transaction>
+    <Transaction>2016/06/17 14:04:51.000.406,=C:\Users\criare\Documents\Embarcadero\Studio\Projects\Nova pasta (30)\server\forms\ufrmMain.pas</Transaction>
+    <Transaction>2016/06/17 14:26:49.000.968,=C:\Users\criare\Documents\Embarcadero\Studio\Projects\Nova pasta (30)\server\Unit1.pas</Transaction>
+    <Transaction>2016/06/17 14:28:16.000.130,C:\Users\criare\Documents\Embarcadero\Studio\Projects\Nova pasta (30)\server\Unit1.dfm=C:\Users\criare\Documents\Embarcadero\Studio\Projects\Nova pasta (30)\server\rd\urdProduto.dfm</Transaction>
+    <Transaction>2016/06/17 14:28:16.000.130,C:\Users\criare\Documents\Embarcadero\Studio\Projects\Nova pasta (30)\server\Unit1.pas=C:\Users\criare\Documents\Embarcadero\Studio\Projects\Nova pasta (30)\server\rd\urdProduto.pas</Transaction>
+    <Transaction>2016/06/17 15:37:45.000.915,=C:\Users\criare\Documents\Embarcadero\Studio\Projects\Nova pasta (30)\server\Unit1.pas</Transaction>
+    <Transaction>2016/06/17 15:38:15.000.236,=C:\Users\criare\Documents\Embarcadero\Studio\Projects\Nova pasta (30)\server\Unit2.pas</Transaction>
+  </Transactions>
+</BorlandProject>

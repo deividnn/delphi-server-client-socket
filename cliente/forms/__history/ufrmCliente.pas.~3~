@@ -1,0 +1,74 @@
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ufrmBase, Data.DB, Vcl.StdCtrls,
+  Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, BSCliente;
+
+type
+  TfrmCliente = class(TfrmBase)
+    procedure FormCreate(Sender: TObject);
+    procedure btnPesquisarClick(Sender: TObject);
+    procedure btnInserirClick(Sender: TObject);
+    procedure btnEditarClick(Sender: TObject);
+
+  private
+    { Private declarations }
+  public
+    objclientes: TBSCliente;
+    { Public declarations }
+  end;
+
+var
+  frmCliente: TfrmCliente;
+
+implementation
+
+{$R *.dfm}
+
+uses ufrmEditaCliente, ufrmMain;
+
+procedure TfrmCliente.btnEditarClick(Sender: TObject);
+begin
+  // inherited;
+  frmEditaCliente := TfrmEditaCliente.Create(nil);
+  try
+    frmEditaCliente.ds_tabela.DataSet := ds_tabela.DataSet;
+    ds_tabela.DataSet.Edit;
+    frmEditaCliente.ShowModal;
+  finally
+    frmEditaCliente.Free;
+  end;
+end;
+
+procedure TfrmCliente.btnInserirClick(Sender: TObject);
+begin
+  // inherited;
+  frmEditaCliente := TfrmEditaCliente.Create(nil);
+  try
+    frmEditaCliente.ds_tabela.DataSet := ds_tabela.DataSet;
+    ds_tabela.DataSet.Insert;
+    frmEditaCliente.ShowModal;
+  finally
+    frmEditaCliente.Free;
+  end;
+end;
+
+procedure TfrmCliente.btnPesquisarClick(Sender: TObject);
+begin
+  inherited;
+  objclientes.select(edt_campo.Text);
+end;
+
+procedure TfrmCliente.FormCreate(Sender: TObject);
+begin
+  inherited;
+  objclientes := TBSCliente.Create;
+  objclientes.select('');
+  ds_tabela.DataSet := objclientes.DataSet;
+end;
+
+
+
+end.

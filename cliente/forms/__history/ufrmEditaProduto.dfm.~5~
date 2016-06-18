@@ -1,0 +1,46 @@
+inherited frmEditaProduto: TfrmEditaProduto
+  Caption = 'Editar Produto'
+  ClientHeight = 278
+  ClientWidth = 351
+  ExplicitWidth = 367
+  ExplicitHeight = 317
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Width = 351
+    Height = 225
+    ExplicitWidth = 307
+    ExplicitHeight = 204
+    object Label1: TLabel
+      Left = 24
+      Top = 48
+      Width = 46
+      Height = 13
+      Caption = 'Descricao'
+    end
+    object DBEdit1: TDBEdit
+      Left = 90
+      Top = 45
+      Width = 207
+      Height = 21
+      DataField = 'descricao'
+      DataSource = ds_tabela
+      TabOrder = 0
+    end
+  end
+  inherited Panel2: TPanel
+    Top = 225
+    Width = 351
+    ExplicitLeft = 0
+    ExplicitTop = 204
+    ExplicitWidth = 307
+  end
+  inherited ds_tabela: TDataSource
+    Left = 72
+    Top = 160
+  end
+  object ACBrEnterTab1: TACBrEnterTab
+    Left = 248
+    Top = 152
+  end
+end

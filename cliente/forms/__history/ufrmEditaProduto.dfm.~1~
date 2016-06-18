@@ -1,0 +1,16 @@
+inherited frmEditaProduto: TfrmEditaProduto
+  Caption = 'Editar Produto'
+  ExplicitWidth = 323
+  ExplicitHeight = 296
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    ExplicitWidth = 307
+    ExplicitHeight = 204
+  end
+  inherited Panel2: TPanel
+    ExplicitLeft = 0
+    ExplicitTop = 204
+    ExplicitWidth = 307
+  end
+end

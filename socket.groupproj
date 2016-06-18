@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{86076D01-A55E-43B3-994C-E980D71A553E}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="server\PrjServer.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="cliente\PrjClient.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="PrjServer">
+        <MSBuild Projects="server\PrjServer.dproj"/>
+    </Target>
+    <Target Name="PrjServer:Clean">
+        <MSBuild Projects="server\PrjServer.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PrjServer:Make">
+        <MSBuild Projects="server\PrjServer.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="PrjClient">
+        <MSBuild Projects="cliente\PrjClient.dproj"/>
+    </Target>
+    <Target Name="PrjClient:Clean">
+        <MSBuild Projects="cliente\PrjClient.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PrjClient:Make">
+        <MSBuild Projects="cliente\PrjClient.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="PrjServer;PrjClient"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="PrjServer:Clean;PrjClient:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="PrjServer:Make;PrjClient:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

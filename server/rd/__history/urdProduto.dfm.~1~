@@ -1,0 +1,5 @@
+object RDProduto: TRDProduto
+  OldCreateOrder = False
+  Height = 380
+  Width = 496
+end

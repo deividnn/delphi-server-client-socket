@@ -1,0 +1,19 @@
+inherited frmProduto: TfrmProduto
+  Caption = 'Produtos'
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    inherited btnInserir: TButton
+      OnClick = btnInserirClick
+    end
+    inherited btnEditar: TButton
+      OnClick = btnEditarClick
+    end
+  end
+  inherited Panel2: TPanel
+    inherited btnPesquisar: TButton
+      OnClick = btnPesquisarClick
+    end
+  end
+end

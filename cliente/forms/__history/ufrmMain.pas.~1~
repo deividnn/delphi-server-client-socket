@@ -1,0 +1,73 @@
+unit ufrmMain;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics, System.UITypes,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TfrmMain = class(TForm)
+    Panel1: TPanel;
+    btnClientes: TSpeedButton;
+    procedure btnClientesClick(Sender: TObject);
+    procedure Initialize;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+ function FormExiste(Name: string): Boolean;
+
+    { Public declarations }
+  end;
+
+var
+  frmMain: TfrmMain;
+
+implementation
+
+{$R *.dfm}
+
+uses ufrmCliente;
+
+procedure TfrmMain.btnClientesClick(Sender: TObject);
+begin
+  if not FormExiste('frmCliente') then
+  begin
+    frmCliente := TfrmCliente.Create(Application);
+    frmCliente.Show;
+  end;
+end;
+
+procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  if MessageDlg('deseja sair ?', mtConfirmation, mbYesNo, 0) = mrNo then
+  begin
+    abort;
+  end
+
+end;
+
+
+function TfrmMain.FormExiste(Name: string): Boolean;
+var I : Integer;
+begin
+  result := false;
+  for i := 0 to MDIChildCount-1 do
+  begin
+    if UpperCase(MDIChildren[i].Name)=UpperCase(Name) then
+    begin
+      result:=true;
+      break;
+    end;
+  end;
+end;
+
+procedure TfrmMain.Initialize;
+begin
+  Application.Initialize;
+  Application.ShowMainForm := false;
+end;
+
+end.

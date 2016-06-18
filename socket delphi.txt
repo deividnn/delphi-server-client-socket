@@ -1,0 +1,202 @@
+CONSIDERE UMA BASE DE DADOS DO MYSQL CHAMADA delphi E SEGUINTE TABELA;
+CREATE TABLE `cliente` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`descricao` VARCHAR(50) NULL DEFAULT '0',
+	`idade` INT(11) NULL DEFAULT NULL,
+	INDEX `Index 1` (`id`)
+);
+CREATE TABLE `produto` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`descricao` VARCHAR(50) NULL DEFAULT '0',
+	INDEX `Index 1` (`id`)
+);
+
+-crie uma pasta chamada socket e crie duas pastas dentro dela chamada server e client;
+
+-crie um projeto vcl e salve o form como ufrmMain name frmMain e caption Servidor e o projeto PrjServer dentro da pasta server;
+
+-clique botao direito em projectgroup e add new project;
+
+-crie um projeto vcl e salve o form como ufrmMain name frmMain e caption Menu e o projeto PrjClient dentro da pasta client;
+
+-salve projetogroup ao lado das pasta server e client como socket;
+
+-no server crie um datamodule e coloque name=dmConexao e salve como udmConexao;
+
+-no dmConexao adicione um tsqlconnection e configure name=conexao, loginprompt=false,selecione a conexao 
+-configurada em dbexpress no connectionname;
+implemente os eventos oncreate e ondestroy do dmConexao;
+//create
+procedure TdmConexao.DataModuleCreate(Sender: TObject);
+begin
+  try
+    conexao.Params.Values['HostName'] := 'localhost';
+    conexao.Params.Values['database'] := 'delphi';
+    conexao.Params.Values['user_name'] := 'deivid';
+    conexao.Params.Values['password'] := '6291';
+    conexao.Connected := true;
+  except
+    on e: Exception do
+      raise Exception.Create(e.Message);
+  end;
+end;
+
+
+//destroy
+procedure TdmConexao.DataModuleDestroy(Sender: TObject);
+begin
+  conexao.Connected := false;
+end;
+
+-em frmMain coloque um imagelist,jvtrayicon e applicationevents
+
+-adicione imagens no imagelist
+
+-no jvtrayicon defina icons com imagelist criado ,defina active=true
+
+-implemente o ondblclick do jvtrayicon:
+procedure TfrmMain.JvTrayIcon1DblClick(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  JvTrayIcon1.Active := False;
+  Self.Visible := True;
+  Application.Restore;
+  ShowWindow(Self.Handle, SW_RESTORE);
+  Self.SetFocus;
+end;
+
+-em applicationevents implemente onminimize:
+procedure TfrmMain.ApplicationEvents1Minimize(Sender: TObject);
+begin
+  JvTrayIcon1.Active := True;
+  Self.Visible := False;
+  ShowWindow(Self.Handle, SW_HIDE);
+end;
+
+-antes do ultimo end do frmMain coloque:
+initialization
+
+Application.ShowMainForm := False;
+
+-crie um remote data module e em coclass name coloque RDCliente;
+
+-em PrjServer.ridl clique em register type library,feche o arquivo e salve ele como PrjServer e a unit que abrir como urdCliente ,salve o PrjServer_TLB;
+
+-em urdCliente adicione um tsqlconnection,tsqlquery e tdatasourprovider;
+
+-em tsqlconnection selecione a conexao do banco em connectioname e desmarque loginprompt;
+
+-em tsqlquery coloque name = qry_cliente e sqlconnection selecione o tsqlconnection
+
+-em tdatasourceprovider coloque name = dsp_cliente,em options marque como true poincfieldprops,poautorefresh,popropogatechanges,poallowcommandtext
+
+-clique botao direito em qry_cliente e va em fields editor e add all field
+
+-nos fields da qry_cliente ,na chave primaria em provider flags marque update,where e key nas restante apenas update,(quando a consulta for join nao marca nada)
+
+-em RDCliente uses dmConexao;
+
+-em RDCliente implemente oncreate:
+//oncreate
+procedure TRDCliente.RemoteDataModuleCreate(Sender: TObject);
+var
+  i: integer;
+begin
+  for i := 0 to ComponentCount - 1 do
+  begin
+    if (Components[i] is TSQLQuery) then
+      (Components[i] as TSQLQuery).SQLConnection := dmConexao.conexao;
+
+  end;
+
+end;
+
+
+-em dsp_cliente implemente o ondatarequest e setar datatset=qry_cliente:
+//datarequest
+function TRDCliente.dsp_clienteDataRequest(Sender: TObject; Input: OleVariant)
+  : OleVariant;
+var
+  wsql: string;
+begin
+  wsql := 'select * from cliente';
+  if (Input[0] <> '') then
+  begin
+    // nao traz nenhm registro
+    wsql := wsql + ' where descricao like :nome';
+  end
+  else
+    // traz todos os registros
+    wsql := 'select * from cliente';
+  qry_cliente.Close;
+  qry_cliente.SQL.Clear;
+  qry_cliente.SQL.Add(wsql);
+  if (Input[0] <> '') then
+    qry_cliente.ParamByName('nome').AsString := '%' + Input[0] + '%';
+  result := dsp_cliente.Data;
+end;
+
+-crie um tsqlquery coloque name=qry
+
+implemente a funcao generator:
+function TRDCliente.generator: integer;
+begin
+  qry.Close;
+  qry.SQL.Clear;
+  qry.SQL.Add('select max(id)+1 as sequenciador from cliente');
+  qry.Open;
+  if qry.FieldByName('sequenciador').AsInteger = 1 then
+    result := 1
+  else
+    result := qry.FieldByName('sequenciador').AsInteger;
+end;
+
+
+-em dsp_cliente implemente o evento afterupdaterecord:
+procedure TRDCliente.dsp_clienteAfterUpdateRecord(Sender: TObject;
+  SourceDS: TDataSet; DeltaDS: TCustomClientDataSet; UpdateKind: TUpdateKind);
+begin
+  if UpdateKind = ukInsert then
+    DeltaDS.FieldByName('id').NewValue := generator;
+end;
+
+
+-remova o tsqlconnection do RDCliente;
+
+
+-no projeto client em ufrmMain adicione 1 panel e defina como align top,remova os textos dos captions tbm;adicione um speedbutton no panel top e coloque name=btncliente  caption=clientes;
+
+-em ufrmMain coloque em windowsstate = maximized;em formstyle=mdiform
+
+-crie um vcl form como ufrmBase,name=frmBase,caption=dados  e formstyle=mdichild,options>dgediting=false;adicione 3 panels,um align right,um align top e outro align client,remova os captions,insira 4 buttons no panel right,coloque names =btninserir,btnexcluir,btneditar e btnfechar;adicione datasource e coloque name=ds_tabela e adicione um dbgrid e coloque name=grid e datasource=ds_tabela e align=client;no panel top adicione um edit e coloque name=edt_campo e limpe o text, adicione um button e coloque name=btnpesquisar e caption=Pesquisar
+
+-implemente o botao fechar:
+procedure TfrmBase.btnFecharClick(Sender: TObject);
+begin
+  self.Close;
+  self.free;
+end;
+
+-crie um novo vcl form herdado do ufrmBase e coloque name=frmCliente,caption=Clientes e salve como ufrmCliente;
+
+-implemente botao clientes do frmMain:
+procedure TfrmMain.btnClientesClick(Sender: TObject);
+begin
+frmCliente:=TfrmCliente.Create(Application);
+frmCliente.Show;
+end;
+
+-implemente botao excluir do ufrmBase:
+procedure TfrmBase.Button1Click(Sender: TObject);
+begin
+ds_tabela.DataSet.Delete;
+end;
+
+-crie a classe BSBase;
+
+-crie a unit BSCliente herdada de BSBase;
+
+-pesquisar registro e setalo no form
+-combobox da tabela
+-mostrar erros de sql
+abrir form em delphi

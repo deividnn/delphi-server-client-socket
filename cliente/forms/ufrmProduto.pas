@@ -1,0 +1,74 @@
+unit ufrmProduto;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ufrmBase, Data.DB, Vcl.StdCtrls,
+  Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, BSProduto;
+
+type
+  TfrmProduto = class(TfrmBase)
+    procedure FormCreate(Sender: TObject);
+    procedure btnPesquisarClick(Sender: TObject);
+    procedure btnInserirClick(Sender: TObject);
+    procedure btnEditarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    objproduto: TBSProduto;
+  end;
+
+var
+  frmProduto: TfrmProduto;
+
+implementation
+
+{$R *.dfm}
+
+uses ufrmEditaProduto;
+
+procedure TfrmProduto.btnEditarClick(Sender: TObject);
+begin
+  // inherited;
+
+  try
+    frmEditaProduto := TfrmEditaProduto.Create(nil);
+    frmEditaProduto.ds_tabela.DataSet := ds_tabela.DataSet;
+    ds_tabela.DataSet.Edit;
+    frmEditaProduto.ShowModal;
+  finally
+    frmEditaProduto.Free;
+  end;
+end;
+
+procedure TfrmProduto.btnInserirClick(Sender: TObject);
+begin
+  // inherited;
+  try
+    frmEditaProduto := TfrmEditaProduto.Create(nil);
+    frmEditaProduto.ds_tabela.DataSet := ds_tabela.DataSet;
+    ds_tabela.DataSet.insert;
+    frmEditaProduto.ShowModal;
+  finally
+    frmEditaProduto.Free;
+  end;
+end;
+
+procedure TfrmProduto.btnPesquisarClick(Sender: TObject);
+begin
+  inherited;
+  objproduto.select(edt_campo.Text);
+end;
+
+procedure TfrmProduto.FormCreate(Sender: TObject);
+begin
+  inherited;
+  objproduto := TBSProduto.Create;
+  objproduto.select('');
+  ds_tabela.DataSet := objproduto.DataSet;
+end;
+
+end.
